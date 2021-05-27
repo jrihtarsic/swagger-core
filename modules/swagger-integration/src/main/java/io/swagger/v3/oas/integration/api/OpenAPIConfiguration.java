@@ -45,6 +45,11 @@ public interface OpenAPIConfiguration {
     Boolean isSortOutput();
 
     /**
+     * @since 2.1.9
+     */
+    Boolean isAlwaysResolveAppPath();
+
+    /**
      * @since 2.1.8
      */
     Boolean isOpenAPI31();
