@@ -70,6 +70,10 @@ public class Schema<T> {
     private String description = null;
     private String format = null;
     private String $ref = null;
+    @OpenAPI31
+    private String $id = null;
+    @OpenAPI31
+    private String $schema = null;
     @OpenAPI30
     private Boolean nullable = null;
     private Boolean readOnly = null;
@@ -699,6 +703,30 @@ public class Schema<T> {
 
     public Schema format(String format) {
         this.format = format;
+        return this;
+    }
+
+    public String get$id() {
+        return $id;
+    }
+
+    public void set$id(String $id) {
+        this.$id = $id;
+    }
+    public Schema id(String id) {
+        this.$id = id;
+        return this;
+    }
+
+    public String get$schema() {
+        return $schema;
+    }
+
+    public void set$schema(String $schema) {
+        this.$schema = $schema;
+    }
+    public Schema schema(String $schema) {
+        this.$schema = $schema;
         return this;
     }
 

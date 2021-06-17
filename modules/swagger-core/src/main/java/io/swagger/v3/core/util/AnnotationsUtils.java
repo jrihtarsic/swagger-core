@@ -62,6 +62,8 @@ public abstract class AnnotationsUtils {
         if (StringUtils.isBlank(schema.type())
                 && StringUtils.isBlank(schema.format())
                 && StringUtils.isBlank(schema.title())
+                && StringUtils.isBlank(schema.id())
+                && StringUtils.isBlank(schema.schema())
                 && StringUtils.isBlank(schema.description())
                 && StringUtils.isBlank(schema.ref())
                 && StringUtils.isBlank(schema.name())
@@ -164,6 +166,12 @@ public abstract class AnnotationsUtils {
             return false;
         }
         if (!StringUtils.equals(thisSchema.title(), thatSchema.title())) {
+            return false;
+        }
+        if (!StringUtils.equals(thisSchema.id(), thatSchema.id())) {
+            return false;
+        }
+        if (!StringUtils.equals(thisSchema.schema(), thatSchema.schema())) {
             return false;
         }
         if (!StringUtils.equals(thisSchema.description(), thatSchema.description())) {
@@ -483,6 +491,13 @@ public abstract class AnnotationsUtils {
         if (StringUtils.isNotBlank(schema.title())) {
             schemaObject.setTitle(schema.title());
         }
+        if (StringUtils.isNotBlank(schema.id())) {
+            schemaObject.set$id(schema.id());
+        }
+        if (StringUtils.isNotBlank(schema.schema())) {
+            schemaObject.set$schema(schema.schema());
+        }
+
         if (schema.writeOnly()) {
             schemaObject.setWriteOnly(schema.writeOnly());
         }
@@ -1462,6 +1477,22 @@ public abstract class AnnotationsUtils {
                     return master.name();
                 }
                 return patch.name();
+            }
+
+            @Override
+            public String id() {
+                if (StringUtils.isNotBlank(master.id()) || StringUtils.isBlank(patch.id())) {
+                    return master.id();
+                }
+                return patch.id();
+            }
+
+            @Override
+            public String schema() {
+                if (StringUtils.isNotBlank(master.schema()) || StringUtils.isBlank(patch.schema())) {
+                    return master.schema();
+                }
+                return patch.schema();
             }
 
             @Override

@@ -33,6 +33,9 @@ public class PathParameter extends Parameter {
      **/
     @Override
     public String getIn() {
+        if (getOnlyRef()){
+            return null;
+        }
         return in;
     }
 
@@ -54,6 +57,9 @@ public class PathParameter extends Parameter {
      **/
     @Override
     public Boolean getRequired() {
+        if (getOnlyRef()){
+            return null;
+        }
         return required;
     }
 

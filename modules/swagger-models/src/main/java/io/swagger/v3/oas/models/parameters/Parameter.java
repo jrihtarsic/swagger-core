@@ -16,6 +16,7 @@
 
 package io.swagger.v3.oas.models.parameters;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.models.examples.Example;
 import io.swagger.v3.oas.models.media.Content;
 import io.swagger.v3.oas.models.media.Schema;
@@ -38,6 +39,7 @@ public class Parameter {
     private Boolean deprecated = null;
     private Boolean allowEmptyValue = null;
     private String $ref = null;
+    private Boolean onlyRef = Boolean.TRUE;
 
     /**
      * Gets or Sets style
@@ -72,6 +74,16 @@ public class Parameter {
     private Content content = null;
     private java.util.Map<String, Object> extensions = null;
 
+    @JsonIgnore
+    boolean getOnlyRef(){
+        return onlyRef && $ref!=null && !$ref.isEmpty();
+    }
+
+    public void setOnlyRef(Boolean onlyRef) {
+         this.onlyRef = onlyRef;
+    }
+
+
     /**
      * returns the name property from a Parameter instance.
      *
@@ -79,6 +91,9 @@ public class Parameter {
      **/
 
     public String getName() {
+        if (getOnlyRef()){
+            return null;
+        }
         return name;
     }
 
@@ -98,6 +113,9 @@ public class Parameter {
      **/
 
     public String getIn() {
+        if (getOnlyRef()){
+            return null;
+        }
         return in;
     }
 
@@ -120,6 +138,9 @@ public class Parameter {
      **/
 
     public String getDescription() {
+        if (getOnlyRef()){
+            return null;
+        }
         return description;
     }
 
@@ -139,6 +160,9 @@ public class Parameter {
      **/
 
     public Boolean getRequired() {
+        if (getOnlyRef()){
+            return null;
+        }
         return required;
     }
 
@@ -158,6 +182,9 @@ public class Parameter {
      **/
 
     public Boolean getDeprecated() {
+        if (getOnlyRef()){
+            return null;
+        }
         return deprecated;
     }
 
@@ -177,6 +204,9 @@ public class Parameter {
      **/
 
     public Boolean getAllowEmptyValue() {
+        if (getOnlyRef()){
+            return null;
+        }
         return allowEmptyValue;
     }
 
@@ -196,6 +226,9 @@ public class Parameter {
      **/
 
     public StyleEnum getStyle() {
+        if (getOnlyRef()){
+            return null;
+        }
         return style;
     }
 
@@ -215,6 +248,9 @@ public class Parameter {
      **/
 
     public Boolean getExplode() {
+        if (getOnlyRef()){
+            return null;
+        }
         return explode;
     }
 
@@ -234,6 +270,9 @@ public class Parameter {
      **/
 
     public Boolean getAllowReserved() {
+        if (getOnlyRef()){
+            return null;
+        }
         return allowReserved;
     }
 
@@ -253,6 +292,9 @@ public class Parameter {
      **/
 
     public Schema getSchema() {
+        if (getOnlyRef()){
+            return null;
+        }
         return schema;
     }
 
@@ -299,6 +341,9 @@ public class Parameter {
      **/
 
     public Object getExample() {
+        if (getOnlyRef()){
+            return null;
+        }
         return example;
     }
 
@@ -318,6 +363,9 @@ public class Parameter {
      **/
 
     public Content getContent() {
+        if (getOnlyRef()){
+            return null;
+        }
         return content;
     }
 

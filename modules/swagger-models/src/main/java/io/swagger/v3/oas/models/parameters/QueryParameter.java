@@ -32,6 +32,9 @@ public class QueryParameter extends Parameter {
      **/
     @Override
     public String getIn() {
+        if (getOnlyRef()) {
+            return null;
+        }
         return in;
     }
 

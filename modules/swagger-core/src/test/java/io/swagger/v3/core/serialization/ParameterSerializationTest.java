@@ -83,6 +83,16 @@ public class ParameterSerializationTest {
         SerializationMatchers.assertEqualsToJson(p, json);
     }
 
+    @Test(description = "it should serialize a PathParameter with referene")
+    public void serializePathParameterWitReference() {
+        final Parameter p = new PathParameter()
+                .schema(new ArraySchema().items(new IntegerSchema()))
+                .$ref("#/components/parameters/test");
+        p.setOnlyRef(true);
+        final String json = "{\"$ref\": \"#/components/parameters/test\"}\n";
+        SerializationMatchers.assertEqualsToJson(p, json);
+    }
+
     @Test(description = "it should it should serialize a HeaderParameter")
     public void serializeHeaderParameter() {
         final Parameter p = new HeaderParameter()

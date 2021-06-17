@@ -1421,6 +1421,8 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
                 composedSchema = (ComposedSchema) new ComposedSchema()
                         .title(subtypeModel.getTitle())
                         .name(subtypeModel.getName())
+                        .id(subtypeModel.get$id())
+                        .schema(subtypeModel.get$schema())
                         .deprecated(subtypeModel.getDeprecated())
                         .additionalProperties(subtypeModel.getAdditionalProperties())
                         .description(subtypeModel.getDescription())
@@ -1570,6 +1572,19 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
     protected String resolveFormat(Annotated a, Annotation[] annotations, io.swagger.v3.oas.annotations.media.Schema schema) {
         if (schema != null && StringUtils.isNotBlank(schema.format())) {
             return schema.format();
+        }
+        return null;
+    }
+
+    protected String resolveId(Annotated a, Annotation[] annotations, io.swagger.v3.oas.annotations.media.Schema schema) {
+        if (schema != null && StringUtils.isNotBlank(schema.id())) {
+            return schema.id();
+        }
+        return null;
+    }
+    protected String resolveSchema(Annotated a, Annotation[] annotations, io.swagger.v3.oas.annotations.media.Schema schema) {
+        if (schema != null && StringUtils.isNotBlank(schema.schema())) {
+            return schema.schema();
         }
         return null;
     }
@@ -2152,6 +2167,14 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
         String title = resolveTitle(a, annotations, schemaAnnotation);
         if (StringUtils.isNotBlank(title)) {
             schema.title(title);
+        }
+        String id = resolveId(a, annotations, schemaAnnotation);
+        if (StringUtils.isNotBlank(id)) {
+            schema.id(id);
+        }
+        String schemaUrl = resolveSchema(a, annotations, schemaAnnotation);
+        if (StringUtils.isNotBlank(schemaUrl)) {
+            schema.schema(schemaUrl);
         }
         String format = resolveFormat(a, annotations, schemaAnnotation);
         if (StringUtils.isNotBlank(format) && StringUtils.isBlank(schema.getFormat())) {

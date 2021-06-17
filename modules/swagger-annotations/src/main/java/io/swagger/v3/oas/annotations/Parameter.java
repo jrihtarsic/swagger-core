@@ -175,4 +175,11 @@ public @interface Parameter {
      * @return the reference
      **/
     String ref() default "";
+
+    /**
+     * Force not print only Ref in ref is given     *
+     *
+     * @return Force not print only Ref in ref is given
+     **/
+    boolean printOnlyRef() default true;
 }

@@ -125,6 +125,8 @@ public class ParameterProcessor {
                 if (p.required()) {
                     parameter.setRequired(p.required());
                 }
+                parameter.setOnlyRef(p.printOnlyRef());
+
                 if (p.allowEmptyValue()) {
                     parameter.setAllowEmptyValue(p.allowEmptyValue());
                 }

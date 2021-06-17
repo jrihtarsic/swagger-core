@@ -206,6 +206,9 @@ public @interface Schema {
      **/
     String ref() default "";
 
+    String id() default "";
+    String schema() default "";
+
     /**
      * If true, designates a value as possibly null.
      *
