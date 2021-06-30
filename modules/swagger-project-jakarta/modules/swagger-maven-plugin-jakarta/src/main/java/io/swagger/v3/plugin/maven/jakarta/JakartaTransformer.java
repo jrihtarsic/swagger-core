@@ -284,12 +284,12 @@ public class JakartaTransformer {
         Files.move(Paths.get(outPath + File.separator +
                         "META-INF" + File.separator +
                         "maven" + File.separator +
-                        "com.github.jrihtarsic" + File.separator +
+                        "com.github.jrihtarsic.swagger" + File.separator +
                         "swagger-maven-plugin"),
                 Paths.get(outPath + File.separator +
                         "META-INF" + File.separator +
                         "maven" + File.separator +
-                        "com.github.jrihtarsic" + File.separator +
+                        "com.github.jrihtarsic.swagger" + File.separator +
                         "swagger-maven-plugin-jakarta")
         );
 
