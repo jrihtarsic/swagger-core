@@ -1,3 +1,9 @@
+**NOTE:** THIS IS FORK from https://github.com/swagger-api/swagger-core and it intended only for testing and piloting REST related projects
+For production use the original libraries!!!!
+
+
+
+
 # Swagger Core <img src="https://raw.githubusercontent.com/swagger-api/swagger.io/wordpress/images/assets/SW-logo-clr.png" height="50" align="right">
 
 **NOTE:** If you're looking for Swagger Core 1.5.X and OpenAPI 2.0, please refer to [1.5 branch](https://github.com/swagger-api/swagger-core/tree/1.5).

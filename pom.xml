@@ -1,12 +1,12 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.swagger.core.v3</groupId>
+    <groupId>com.github.jrihtarsic</groupId>
     <artifactId>swagger-project</artifactId>
     <packaging>pom</packaging>
     <name>swagger-project</name>
     <description>swagger-project</description>
-    <version>2.1.10-ISA2-SNAPSHOT</version>
+    <version>2.1.10-test</version>
     <url>https://github.com/swagger-api/swagger-core</url>
 
     <!-- Where to deploy binaries -->
