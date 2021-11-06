@@ -1,25 +1,22 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.jrihtarsic.swagger</groupId>
+    <groupId>io.github.jrihtarsic.swagger</groupId>
     <artifactId>swagger-project</artifactId>
     <packaging>pom</packaging>
     <name>swagger-project</name>
-    <description>swagger-project</description>
-    <version>2.1.10-test</version>
+    <description>swagger-project -  extension for testing purposes</description>
+    <version>2.1.10-OA3.1-SNAPSHOT</version>
     <url>https://github.com/swagger-api/swagger-core</url>
 
     <!-- Where to deploy binaries -->
     <distributionManagement>
-        <repository>
-            <id>cefdigital-releases</id>
-            <url>https://ec.europa.eu/cefdigital/artifact/content/repositories/eDelivery/</url>
-        </repository>
         <snapshotRepository>
-            <id>cefdigital-snapshots</id>
-            <url>https://ec.europa.eu/cefdigital/artifact/content/repositories/eDelivery-snapshots/</url>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
+
     <prerequisites>
         <maven>2.2.0</maven>
     </prerequisites>
@@ -85,6 +82,7 @@
         <directory>target</directory>
         <finalName>${project.artifactId}-${project.version}</finalName>
         <plugins>
+
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
@@ -201,12 +199,8 @@
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                    <stagingProgressTimeoutMinutes>30</stagingProgressTimeoutMinutes>
-<!--                    <skipStaging>true</skipStaging>
-                    <skipRemoteStaging>true</skipRemoteStaging>
-                    <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>-->
                 </configuration>
             </plugin>
 <!-- TODO replace custom plugin with Eclipse's when attachment of transformed JAR supports being optional.
@@ -278,13 +272,15 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
                     <version>1.6</version>
-                    <configuration>
-                        <!-- Prevent `gpg` from using pinentry programs -->
-                        <gpgArguments>
-                            <arg>--pinentry-mode</arg>
-                            <arg>loopback</arg>
-                        </gpgArguments>
-                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.eclipse.jetty</groupId>

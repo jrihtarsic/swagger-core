@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>swagger-project</artifactId>
-        <groupId>com.github.jrihtarsic.swagger</groupId>
-        <version>2.1.10-test</version>
+        <groupId>io.github.jrihtarsic.swagger</groupId>
+        <version>2.1.10-OA3.1-SNAPSHOT</version>
         <relativePath>../../</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -88,7 +88,7 @@
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>com.github.jrihtarsic.swagger</groupId>
+                        <groupId>io.github.jrihtarsic.swagger</groupId>
                         <artifactId>swagger-jaxrs2</artifactId>
                         <version>${project.version}</version>
                     </dependency>
@@ -114,7 +114,7 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>com.github.jrihtarsic.swagger</groupId>
+                <groupId>io.github.jrihtarsic.swagger</groupId>
                 <artifactId>swagger-eclipse-transformer-maven-plugin</artifactId>
                 <version>${project.version}</version>
                 <configuration>
@@ -157,7 +157,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.jrihtarsic.swagger</groupId>
+            <groupId>io.github.jrihtarsic.swagger</groupId>
             <artifactId>swagger-jaxrs2</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
