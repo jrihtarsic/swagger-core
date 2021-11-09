@@ -7,21 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Map;
 
-public abstract class SchemaConverterMixin {
-
-    @JsonIgnore
-    public abstract Map<String, Object> getJsonSchema();
-
-/*
-    @JsonIgnore
-    public abstract Boolean getNullable();
-
-    @JsonIgnore
-    public abstract Boolean getExclusiveMinimum();
-
-    @JsonIgnore
-    public abstract Boolean getExclusiveMaximum();
-*/
+public abstract class MediaTypeMixin {
 
     @JsonAnyGetter
     public abstract Map<String, Object> getExtensions();
@@ -34,8 +20,4 @@ public abstract class SchemaConverterMixin {
 
     @JsonInclude(JsonInclude.Include.CUSTOM)
     public abstract Object getExample();
-
-    @JsonIgnore
-    public abstract Object getJsonSchemaImpl();
-
 }

@@ -1,9 +1,3 @@
-**NOTE:** THIS IS FORK from https://github.com/swagger-api/swagger-core and it intended only for testing and piloting REST related projects
-For production use the original libraries!!!!
-
-
-
-
 # Swagger Core <img src="https://raw.githubusercontent.com/swagger-api/swagger.io/wordpress/images/assets/SW-logo-clr.png" height="50" align="right">
 
 **NOTE:** If you're looking for Swagger Core 1.5.X and OpenAPI 2.0, please refer to [1.5 branch](https://github.com/swagger-api/swagger-core/tree/1.5).
@@ -27,7 +21,8 @@ The OpenAPI Specification has undergone several revisions since initial creation
 
 Swagger core Version      | Release Date | OpenAPI Spec compatibility | Notes | Status
 ------------------------- | ------------ | -------------------------- | ----- | ----
-2.1.9 (**current stable**)| 2021-04-20   | 3.0           | [tag v2.1.9](https://github.com/swagger-api/swagger-core/tree/v2.1.9) | Supported
+2.1.10 (**current stable**)| 2021-06-28   | 3.0           | [tag v2.1.10](https://github.com/swagger-api/swagger-core/tree/v2.1.10) | Supported
+2.1.9                     | 2021-04-20   | 3.0           | [tag v2.1.9](https://github.com/swagger-api/swagger-core/tree/v2.1.9) | Supported
 2.1.8                     | 2021-04-18   | 3.0           | [tag v2.1.8](https://github.com/swagger-api/swagger-core/tree/v2.1.8) | Supported
 2.1.7                     | 2021-02-18   | 3.0           | [tag v2.1.7](https://github.com/swagger-api/swagger-core/tree/v2.1.7) | Supported
 2.1.6                     | 2020-12-04   | 3.0           | [tag v2.1.6](https://github.com/swagger-api/swagger-core/tree/v2.1.6) | Supported
@@ -80,7 +75,7 @@ You need the following installed and available in your $PATH:
 * Jackson 2.4.5 or greater
 
 
-### To build from source (currently 2.1.10-ISA2-SNAPSHOT)
+### To build from source (currently 2.1.11-SNAPSHOT)
 ```
 # first time building locally
 mvn -N

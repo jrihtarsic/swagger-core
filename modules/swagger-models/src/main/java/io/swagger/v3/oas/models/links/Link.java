@@ -16,6 +16,7 @@
 
 package io.swagger.v3.oas.models.links;
 
+import io.swagger.v3.oas.annotations.OpenAPI31;
 import io.swagger.v3.oas.models.headers.Header;
 import io.swagger.v3.oas.models.servers.Server;
 
@@ -123,12 +124,16 @@ public class Link {
         this.parameters = parameters;
     }
 
-    public Link parameters(String name, String parameter) {
+    public Link parameters(Map<String, String> parameters) {
+        this.parameters = parameters;
+        return this;
+    }
+
+    public Link addParameters(String name, String parameter) {
         if (this.parameters == null) {
             this.parameters = new LinkedHashMap<>();
         }
         this.parameters.put(name, parameter);
-
         return this;
     }
 
@@ -259,6 +264,14 @@ public class Link {
             this.extensions = new java.util.LinkedHashMap<>();
         }
         this.extensions.put(name, value);
+    }
+
+    @OpenAPI31
+    public void addExtension31(String name, Object value) {
+        if (name != null && (name.startsWith("x-oas-") || name.startsWith("x-oai-"))) {
+            return;
+        }
+        addExtension(name, value);
     }
 
     public void setExtensions(java.util.Map<String, Object> extensions) {

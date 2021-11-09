@@ -16,6 +16,8 @@
 
 package io.swagger.v3.oas.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.OpenAPI31;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
@@ -32,7 +34,7 @@ import java.util.Objects;
 /**
  * OpenAPI
  *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.1.0/versions/3.1.0.md"
+ * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.1/versions/3.0.1.md"
  */
 
 public class OpenAPI {
@@ -46,9 +48,31 @@ public class OpenAPI {
     private Components components = null;
     private java.util.Map<String, Object> extensions = null;
 
+    @OpenAPI31
+    private String jsonSchemaDialect;
+
+    public OpenAPI() {}
+    public OpenAPI(SpecVersion specVersion) { this.specVersion = specVersion;}
+    private SpecVersion specVersion = SpecVersion.V30;
+
+    @JsonIgnore
+    public SpecVersion getSpecVersion() {
+        return this.specVersion;
+    }
+
+    public void setSpecVersion(SpecVersion specVersion) {
+        this.specVersion = specVersion;
+    }
+
+    public OpenAPI specVersion(SpecVersion specVersion) {
+        this.setSpecVersion(specVersion);
+        return this;
+    }
+
     /**
      * @since 2.1.8 (OpenAPI 3.1.0)
      */
+    @OpenAPI31
     private java.util.Map<String, PathItem> webhooks = null;
 
     /**
@@ -259,28 +283,48 @@ public class OpenAPI {
     /**
      * returns the webhooks property from a OpenAPI instance.
      *
-     * @since 2.1.8 (OpenAPI 3.1.0)
+     * @since 2.1.10 (OpenAPI 3.1.0)
      * @return Map&lt;String, PathItem&gt; webhooks
      **/
 
+    @OpenAPI31
     public Map<String, PathItem> getWebhooks() {
         return webhooks;
     }
 
+    @OpenAPI31
     public void setWebhooks(Map<String, PathItem> webhooks) {
         this.webhooks = webhooks;
     }
 
+    @OpenAPI31
     public OpenAPI webhooks(Map<String, PathItem> webhooks) {
         this.webhooks = webhooks;
         return this;
     }
 
+    @OpenAPI31
     public OpenAPI addWebhooks(String key, PathItem pathItem) {
         if (this.webhooks == null) {
             this.webhooks = new LinkedHashMap<>();
         }
         this.webhooks.put(key, pathItem);
+        return this;
+    }
+
+    @OpenAPI31
+    public String getJsonSchemaDialect() {
+        return jsonSchemaDialect;
+    }
+
+    @OpenAPI31
+    public void setJsonSchemaDialect(String jsonSchemaDialect) {
+        this.jsonSchemaDialect = jsonSchemaDialect;
+    }
+
+    @OpenAPI31
+    public OpenAPI jsonSchemaDialect(String jsonSchemaDialect) {
+        this.jsonSchemaDialect = jsonSchemaDialect;
         return this;
     }
 
@@ -303,12 +347,13 @@ public class OpenAPI {
                 Objects.equals(this.paths, openAPI.paths) &&
                 Objects.equals(this.components, openAPI.components) &&
                 Objects.equals(this.webhooks, openAPI.webhooks) &&
-                Objects.equals(this.extensions, openAPI.extensions);
+                Objects.equals(this.extensions, openAPI.extensions) &&
+                Objects.equals(this.jsonSchemaDialect, openAPI.jsonSchemaDialect);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(openapi, info, externalDocs, servers, security, tags, paths, components, webhooks, extensions);
+        return Objects.hash(openapi, info, externalDocs, servers, security, tags, paths, components, webhooks, extensions, jsonSchemaDialect);
     }
 
     public java.util.Map<String, Object> getExtensions() {
@@ -323,6 +368,14 @@ public class OpenAPI {
             this.extensions = new java.util.LinkedHashMap<>();
         }
         this.extensions.put(name, value);
+    }
+
+    @OpenAPI31
+    public void addExtension31(String name, Object value) {
+        if (name != null && (name.startsWith("x-oas-") || name.startsWith("x-oai-"))) {
+            return;
+        }
+        addExtension(name, value);
     }
 
     public void setExtensions(java.util.Map<String, Object> extensions) {
@@ -347,7 +400,8 @@ public class OpenAPI {
         sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
         sb.append("    paths: ").append(toIndentedString(paths)).append("\n");
         sb.append("    components: ").append(toIndentedString(components)).append("\n");
-        sb.append("    webhooks: ").append(toIndentedString(webhooks)).append("\n");
+        if (specVersion == SpecVersion.V31) sb.append("    webhooks: ").append(toIndentedString(webhooks)).append("\n");
+        sb.append("    jsonSchemaDialect: ").append(toIndentedString(jsonSchemaDialect)).append("\n");
         sb.append("}");
         return sb.toString();
     }

@@ -17,6 +17,7 @@
 package io.swagger.v3.oas.models.parameters;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.OpenAPI31;
 import io.swagger.v3.oas.models.examples.Example;
 import io.swagger.v3.oas.models.media.Content;
 import io.swagger.v3.oas.models.media.Schema;
@@ -80,15 +81,14 @@ public class Parameter {
     }
 
     public void setOnlyRef(Boolean onlyRef) {
-         this.onlyRef = onlyRef;
+        this.onlyRef = onlyRef;
     }
 
-
-    /**
-     * returns the name property from a Parameter instance.
-     *
-     * @return String name
-     **/
+        /**
+         * returns the name property from a Parameter instance.
+         *
+         * @return String name
+         **/
 
     public String getName() {
         if (getOnlyRef()){
@@ -437,6 +437,14 @@ public class Parameter {
             this.extensions = new java.util.LinkedHashMap<>();
         }
         this.extensions.put(name, value);
+    }
+
+    @OpenAPI31
+    public void addExtension31(String name, Object value) {
+        if (name != null && (name.startsWith("x-oas-") || name.startsWith("x-oai-"))) {
+            return;
+        }
+        addExtension(name, value);
     }
 
     public void setExtensions(java.util.Map<String, Object> extensions) {

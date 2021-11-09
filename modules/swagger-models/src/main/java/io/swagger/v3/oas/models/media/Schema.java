@@ -17,18 +17,21 @@
 package io.swagger.v3.oas.models.media;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.v3.oas.OpenAPI30;
-import io.swagger.v3.oas.OpenAPI31;
+import io.swagger.v3.oas.annotations.OpenAPI30;
+import io.swagger.v3.oas.annotations.OpenAPI31;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
+import io.swagger.v3.oas.models.SpecVersion;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Schema
@@ -45,13 +48,9 @@ public class Schema<T> {
     private BigDecimal maximum = null;
     @OpenAPI30
     private Boolean exclusiveMaximum = null;
-    @OpenAPI31
-    private BigDecimal exclusiveMaximumValue = null;
     private BigDecimal minimum = null;
     @OpenAPI30
     private Boolean exclusiveMinimum = null;
-    @OpenAPI31
-    private BigDecimal exclusiveMinimumValue = null;
     private Integer maxLength = null;
     private Integer minLength = null;
     private String pattern = null;
@@ -64,16 +63,10 @@ public class Schema<T> {
     private String type = null;
     private Schema not = null;
     private Map<String, Schema> properties = null;
-    @OpenAPI31
-    private Map<String, Schema> patternProperties = null;
     private Object additionalProperties = null;
     private String description = null;
     private String format = null;
     private String $ref = null;
-    @OpenAPI31
-    private String $id = null;
-    @OpenAPI31
-    private String $schema = null;
     @OpenAPI30
     private Boolean nullable = null;
     private Boolean readOnly = null;
@@ -87,6 +80,230 @@ public class Schema<T> {
     private Discriminator discriminator = null;
 
     private boolean exampleSetFlag;
+
+    private List<Schema> allOf = null;
+    private List<Schema> anyOf = null;
+    private List<Schema> oneOf = null;
+
+    private Schema<?> items = null;
+
+    protected T _const;
+
+    private SpecVersion specVersion = SpecVersion.V30;
+
+    @JsonIgnore
+    public SpecVersion getSpecVersion() {
+        return this.specVersion;
+    }
+
+    public void setSpecVersion(SpecVersion specVersion) {
+        this.specVersion = specVersion;
+    }
+
+    public Schema specVersion(SpecVersion specVersion) {
+        this.setSpecVersion(specVersion);
+        return this;
+    }
+
+
+    /*
+    @OpenAPI31 fields and accessors
+    */
+
+
+    @OpenAPI31
+    private Set<String> types;
+
+    @OpenAPI31
+    private Map<String, Schema> patternProperties = null;
+    @OpenAPI31
+    private BigDecimal exclusiveMaximumValue = null;
+    @OpenAPI31
+    private BigDecimal exclusiveMinimumValue = null;
+
+
+    @OpenAPI31
+    private Schema contains = null;
+    @OpenAPI31
+    private String $id;
+    @OpenAPI31
+    private String $schema;
+    @OpenAPI31
+    private String $anchor;
+
+    @OpenAPI31
+    public Schema getContains() {
+        return contains;
+    }
+
+    @OpenAPI31
+    public void setContains(Schema contains) {
+        this.contains = contains;
+    }
+
+    @OpenAPI31
+    public String get$id() {
+        return $id;
+    }
+
+    @OpenAPI31
+    public void set$id(String $id) {
+        this.$id = $id;
+    }
+
+    @OpenAPI31
+    public String get$schema() {
+        return $schema;
+    }
+
+    @OpenAPI31
+    public void set$schema(String $schema) {
+        this.$schema = $schema;
+    }
+
+    @OpenAPI31
+    public String get$anchor() {
+        return $anchor;
+    }
+
+    @OpenAPI31
+    public void set$anchor(String $anchor) {
+        this.$anchor = $anchor;
+    }
+
+    /**
+     * returns the exclusiveMaximumValue property from a Schema instance for OpenAPI 3.1.x
+     *
+     * @since 2.1.8
+     * @return BigDecimal exclusiveMaximumValue
+     *
+     **/
+    @OpenAPI31
+    public BigDecimal getExclusiveMaximumValue() {
+        return exclusiveMaximumValue;
+    }
+
+    @OpenAPI31
+    public void setExclusiveMaximumValue(BigDecimal exclusiveMaximumValue) {
+        this.exclusiveMaximumValue = exclusiveMaximumValue;
+    }
+
+    @OpenAPI31
+    public Schema exclusiveMaximumValue(BigDecimal exclusiveMaximumValue) {
+        this.exclusiveMaximumValue = exclusiveMaximumValue;
+        return this;
+    }
+
+    /**
+     * returns the exclusiveMinimumValue property from a Schema instance for OpenAPI 3.1.x
+     *
+     * @since 2.1.8
+     * @return BigDecimal exclusiveMinimumValue
+     *
+     **/
+    @OpenAPI31
+    public BigDecimal getExclusiveMinimumValue() {
+        return exclusiveMinimumValue;
+    }
+    @OpenAPI31
+    public void setExclusiveMinimumValue(BigDecimal exclusiveMinimumValue) {
+        this.exclusiveMinimumValue = exclusiveMinimumValue;
+    }
+    @OpenAPI31
+    public Schema exclusiveMinimumValue(BigDecimal exclusiveMinimumValue) {
+        this.exclusiveMinimumValue = exclusiveMinimumValue;
+        return this;
+    }
+
+    /**
+     * returns the patternProperties property from a Schema instance.
+     *
+     * @since 2.1.8
+     * @return Map&lt;String, Schema&gt; patternProperties
+     **/
+
+    @OpenAPI31
+    public Map<String, Schema> getPatternProperties() {
+        return patternProperties;
+    }
+
+    public void setPatternProperties(Map<String, Schema> patternProperties) {
+        this.patternProperties = patternProperties;
+    }
+
+    @OpenAPI31
+    public Schema patternProperties(Map<String, Schema> patternProperties) {
+        this.patternProperties = patternProperties;
+        return this;
+    }
+
+    @OpenAPI31
+    public Schema addPatternProperty(String key, Schema patternPropertiesItem) {
+        if (this.patternProperties == null) {
+            this.patternProperties = new LinkedHashMap<>();
+        }
+        this.patternProperties.put(key, patternPropertiesItem);
+        return this;
+    }
+
+
+    @OpenAPI31
+    public Schema contains(Schema contains) {
+        this.contains = contains;
+        return this;
+    }
+
+    @OpenAPI31
+    public Schema $id(String $id) {
+        this.$id = $id;
+        return this;
+    }
+
+    @OpenAPI31
+    public Set<String> getTypes() {
+        if ($ref!= null) {
+            return null;
+        }
+        if(types == null|| types.size()==0 && type!=null ){
+            addType(type);
+        }
+        return types;
+    }
+
+    @OpenAPI31
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
+
+    @OpenAPI31
+    public boolean addType(String type) {
+        if (types == null) {
+            types = new LinkedHashSet<>();
+        }
+        return types.add(type);
+    }
+
+    @OpenAPI31
+    public Schema $schema(String $schema) {
+        this.$schema = $schema;
+        return this;
+    }
+
+    @OpenAPI31
+    public Schema $anchor(String $anchor) {
+        this.$anchor = $anchor;
+        return this;
+    }
+
+    @OpenAPI31
+    public Schema types(Set<String> types) {
+        this.types = types;
+        return this;
+    }
+
+    /*
+    INTERNAL MEMBERS @OpenAPI31
+     */
 
     @OpenAPI31
     protected Map<String, Object> jsonSchema = null;
@@ -107,6 +324,30 @@ public class Schema<T> {
         return this;
     }
 
+    @OpenAPI31
+    protected transient Object jsonSchemaImpl = null;
+
+    @OpenAPI31
+    public Object getJsonSchemaImpl() {
+        return jsonSchemaImpl;
+    }
+
+    @OpenAPI31
+    public void setJsonSchemaImpl(Object jsonSchemaImpl) {
+        this.jsonSchemaImpl = jsonSchemaImpl;
+    }
+
+    @OpenAPI31
+    public Schema jsonSchemaImpl(Object jsonSchemaImpl) {
+        setJsonSchemaImpl(jsonSchemaImpl);
+        return this;
+    }
+
+        /*
+    CONSTRUCTORS
+     */
+
+
     public Schema() {
     }
 
@@ -114,6 +355,122 @@ public class Schema<T> {
         this.type = type;
         this.format = format;
     }
+
+    public Schema(SpecVersion specVersion) {
+        this.specVersion = specVersion;
+    }
+
+    protected Schema(String type, String format, SpecVersion specVersion) {
+        this.type = type;
+        this.format = format;
+        this.specVersion = specVersion;
+    }
+
+    /*
+    ACCESSORS
+     */
+
+    /**
+     * returns the allOf property from a ComposedSchema instance.
+     *
+     * @return List&lt;Schema&gt; allOf
+     **/
+
+    public List<Schema> getAllOf() {
+        return allOf;
+    }
+
+    public void setAllOf(List<Schema> allOf) {
+        this.allOf = allOf;
+    }
+
+    public Schema allOf(List<Schema> allOf) {
+        this.allOf = allOf;
+        return this;
+    }
+
+    public Schema addAllOfItem(Schema allOfItem) {
+        if (this.allOf == null) {
+            this.allOf = new ArrayList<>();
+        }
+        this.allOf.add(allOfItem);
+        return this;
+    }
+
+    /**
+     * returns the anyOf property from a ComposedSchema instance.
+     *
+     * @return List&lt;Schema&gt; anyOf
+     **/
+
+    public List<Schema> getAnyOf() {
+        return anyOf;
+    }
+
+    public void setAnyOf(List<Schema> anyOf) {
+        this.anyOf = anyOf;
+    }
+
+    public Schema anyOf(List<Schema> anyOf) {
+        this.anyOf = anyOf;
+        return this;
+    }
+
+    public Schema addAnyOfItem(Schema anyOfItem) {
+        if (this.anyOf == null) {
+            this.anyOf = new ArrayList<>();
+        }
+        this.anyOf.add(anyOfItem);
+        return this;
+    }
+
+    /**
+     * returns the oneOf property from a ComposedSchema instance.
+     *
+     * @return List&lt;Schema&gt; oneOf
+     **/
+
+    public List<Schema> getOneOf() {
+        return oneOf;
+    }
+
+    public void setOneOf(List<Schema> oneOf) {
+        this.oneOf = oneOf;
+    }
+
+    public Schema oneOf(List<Schema> oneOf) {
+        this.oneOf = oneOf;
+        return this;
+    }
+
+    public Schema addOneOfItem(Schema oneOfItem) {
+        if (this.oneOf == null) {
+            this.oneOf = new ArrayList<>();
+        }
+        this.oneOf.add(oneOfItem);
+        return this;
+    }
+
+
+    /**
+     * returns the items property from a ArraySchema instance.
+     *
+     * @return Schema items
+     **/
+
+    public Schema<?> getItems() {
+        return items;
+    }
+
+    public void setItems(Schema<?> items) {
+        this.items = items;
+    }
+
+    public Schema items(Schema<?> items) {
+        this.items = items;
+        return this;
+    }
+
 
     /**
      * returns the name property from a from a Schema instance. Ignored in serialization.
@@ -268,29 +625,6 @@ public class Schema<T> {
     }
 
     /**
-     * returns the exclusiveMaximumValue property from a Schema instance for OpenAPI 3.1.x
-     *
-     * @since 2.1.8
-     * @return BigDecimal exclusiveMaximumValue
-     *
-     **/
-    @OpenAPI31
-    public BigDecimal getExclusiveMaximumValue() {
-        return exclusiveMaximumValue;
-    }
-
-    @OpenAPI31
-    public void setExclusiveMaximumValue(BigDecimal exclusiveMaximumValue) {
-        this.exclusiveMaximumValue = exclusiveMaximumValue;
-    }
-
-    @OpenAPI31
-    public Schema exclusiveMaximumValue(BigDecimal exclusiveMaximumValue) {
-        this.exclusiveMaximumValue = exclusiveMaximumValue;
-        return this;
-    }
-
-    /**
      * returns the minimum property from a Schema instance.
      *
      * @return BigDecimal minimum
@@ -308,6 +642,7 @@ public class Schema<T> {
         this.minimum = minimum;
         return this;
     }
+
 
     /**
      * returns the exclusiveMinimum property from a Schema instance for OpenAPI 3.0.x
@@ -328,26 +663,6 @@ public class Schema<T> {
         return this;
     }
 
-    /**
-     * returns the exclusiveMinimumValue property from a Schema instance for OpenAPI 3.1.x
-     *
-     * @since 2.1.8
-     * @return BigDecimal exclusiveMinimumValue
-     *
-     **/
-    @OpenAPI31
-    public BigDecimal getExclusiveMinimumValue() {
-        return exclusiveMinimumValue;
-    }
-    @OpenAPI31
-    public void setExclusiveMinimumValue(BigDecimal exclusiveMinimumValue) {
-        this.exclusiveMinimumValue = exclusiveMinimumValue;
-    }
-    @OpenAPI31
-    public Schema exclusiveMinimumValue(BigDecimal exclusiveMinimumValue) {
-        this.exclusiveMinimumValue = exclusiveMinimumValue;
-        return this;
-    }
 
     /**
      * returns the maxLength property from a Schema instance.
@@ -619,34 +934,6 @@ public class Schema<T> {
     }
 
     /**
-     * returns the patternProperties property from a Schema instance.
-     *
-     * @since 2.1.8
-     * @return Map&lt;String, Schema&gt; patternProperties
-     **/
-
-    public Map<String, Schema> getPatternProperties() {
-        return patternProperties;
-    }
-
-    public void setPatternProperties(Map<String, Schema> patternProperties) {
-        this.patternProperties = patternProperties;
-    }
-
-    public Schema patternProperties(Map<String, Schema> patternProperties) {
-        this.patternProperties = patternProperties;
-        return this;
-    }
-
-    public Schema addPatternProperty(String key, Schema patternPropertiesItem) {
-        if (this.patternProperties == null) {
-            this.patternProperties = new LinkedHashMap<>();
-        }
-        this.patternProperties.put(key, patternPropertiesItem);
-        return this;
-    }
-
-    /**
      * returns the additionalProperties property from a Schema instance. Can be either a Boolean or a Schema
      *
      * @return Object additionalProperties
@@ -703,30 +990,6 @@ public class Schema<T> {
 
     public Schema format(String format) {
         this.format = format;
-        return this;
-    }
-
-    public String get$id() {
-        return $id;
-    }
-
-    public void set$id(String $id) {
-        this.$id = $id;
-    }
-    public Schema id(String id) {
-        this.$id = id;
-        return this;
-    }
-
-    public String get$schema() {
-        return $schema;
-    }
-
-    public void set$schema(String $schema) {
-        this.$schema = $schema;
-    }
-    public Schema schema(String $schema) {
-        this.$schema = $schema;
         return this;
     }
 
@@ -948,6 +1211,16 @@ public class Schema<T> {
                 Objects.equals(this.extensions, schema.extensions) &&
                 Objects.equals(this.discriminator, schema.discriminator) &&
                 Objects.equals(this._enum, schema._enum) &&
+                Objects.equals(this.contains, schema.contains) &&
+                Objects.equals(this.patternProperties, schema.patternProperties) &&
+                Objects.equals(this.$id, schema.$id) &&
+                Objects.equals(this.$anchor, schema.$anchor) &&
+                Objects.equals(this.$schema, schema.$schema) &&
+                Objects.equals(this.types, schema.types) &&
+                Objects.equals(this.allOf, schema.allOf) &&
+                Objects.equals(this.anyOf, schema.anyOf) &&
+                Objects.equals(this.oneOf, schema.oneOf) &&
+                Objects.equals(this._const, schema._const) &&
                 Objects.equals(this._default, schema._default);
     }
 
@@ -957,7 +1230,7 @@ public class Schema<T> {
                 exclusiveMinimum, exclusiveMinimumValue, maxLength, minLength, pattern, maxItems, minItems, uniqueItems,
                 maxProperties, minProperties, required, type, not, properties, additionalProperties, description,
                 format, $ref, nullable, readOnly, writeOnly, example, externalDocs, deprecated, xml, extensions,
-                discriminator, _enum, _default);
+                discriminator, _enum, _default, patternProperties, $id, $anchor, $schema, types, allOf, anyOf, oneOf, _const);
     }
 
     public java.util.Map<String, Object> getExtensions() {
@@ -987,18 +1260,19 @@ public class Schema<T> {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class Schema {\n");
-        sb.append("    type: ").append(toIndentedString(type)).append("\n");
+        Object typeStr = specVersion == SpecVersion.V30 ? type : types;
+        sb.append("    type: ").append(toIndentedString(typeStr)).append("\n");
         sb.append("    format: ").append(toIndentedString(format)).append("\n");
         sb.append("    $ref: ").append(toIndentedString($ref)).append("\n");
         sb.append("    description: ").append(toIndentedString(description)).append("\n");
         sb.append("    title: ").append(toIndentedString(title)).append("\n");
         sb.append("    multipleOf: ").append(toIndentedString(multipleOf)).append("\n");
         sb.append("    maximum: ").append(toIndentedString(maximum)).append("\n");
-        sb.append("    exclusiveMaximum: ").append(toIndentedString(exclusiveMaximum)).append("\n");
-        sb.append("    exclusiveMaximumValue: ").append(toIndentedString(exclusiveMaximumValue)).append("\n");
+        Object exclusiveMaximumStr = specVersion == SpecVersion.V30 ? exclusiveMaximum : exclusiveMaximumValue;
+        sb.append("    exclusiveMaximum: ").append(toIndentedString(exclusiveMaximumStr)).append("\n");
         sb.append("    minimum: ").append(toIndentedString(minimum)).append("\n");
-        sb.append("    exclusiveMinimum: ").append(toIndentedString(exclusiveMinimum)).append("\n");
-        sb.append("    exclusiveMinimumValue: ").append(toIndentedString(exclusiveMinimumValue)).append("\n");
+        Object exclusiveMinimumStr = specVersion == SpecVersion.V30 ? exclusiveMinimum : exclusiveMinimumValue;
+        sb.append("    exclusiveMinimum: ").append(toIndentedString(exclusiveMinimumStr)).append("\n");
         sb.append("    maxLength: ").append(toIndentedString(maxLength)).append("\n");
         sb.append("    minLength: ").append(toIndentedString(minLength)).append("\n");
         sb.append("    pattern: ").append(toIndentedString(pattern)).append("\n");
@@ -1019,6 +1293,14 @@ public class Schema<T> {
         sb.append("    deprecated: ").append(toIndentedString(deprecated)).append("\n");
         sb.append("    discriminator: ").append(toIndentedString(discriminator)).append("\n");
         sb.append("    xml: ").append(toIndentedString(xml)).append("\n");
+        if (specVersion == SpecVersion.V31) {
+            sb.append("    patternProperties: ").append(toIndentedString(patternProperties)).append("\n");
+            sb.append("    contains: ").append(toIndentedString(contains)).append("\n");
+            sb.append("    $id: ").append(toIndentedString($id)).append("\n");
+            sb.append("    $anchor: ").append(toIndentedString($anchor)).append("\n");
+            sb.append("    $schema: ").append(toIndentedString($schema)).append("\n");
+            sb.append("    const: ").append(toIndentedString(_const)).append("\n");
+        }
         sb.append("}");
         return sb.toString();
     }
@@ -1033,6 +1315,35 @@ public class Schema<T> {
         }
         return o.toString().replace("\n", "\n    ");
     }
+
+    public Schema _default(T _default) {
+        this._default = _default;
+        return this;
+    }
+
+    public Schema _enum(List<T> _enum) {
+        this._enum = _enum;
+        return this;
+    }
+
+    public Schema exampleSetFlag(boolean exampleSetFlag) {
+        this.exampleSetFlag = exampleSetFlag;
+        return this;
+    }
+
+    public T getConst() {
+        return _const;
+    }
+
+    public void setConst(Object _const) {
+        this._const = cast(_const);
+    }
+
+    public Schema _const(Object _const) {
+        this._const = cast(_const);
+        return this;
+    }
+
 
 }
 

@@ -458,9 +458,15 @@ public abstract class AnnotationsUtils {
         }
         if (schema.exclusiveMaximum()) {
             schemaObject.setExclusiveMaximum(schema.exclusiveMaximum());
+            if (schema.exclusiveMaximum() && StringUtils.isNotBlank(schema.maximum())) {
+                schemaObject.setExclusiveMaximumValue(new BigDecimal(schema.maximum()));
+            }
         }
         if (schema.exclusiveMinimum()) {
             schemaObject.setExclusiveMinimum(schema.exclusiveMinimum());
+            if (schema.exclusiveMinimum() && StringUtils.isNotBlank(schema.minimum())) {
+                schemaObject.setExclusiveMaximumValue(new BigDecimal(schema.minimum()));
+            }
         }
         if (schema.maxProperties() > 0) {
             schemaObject.setMaxProperties(schema.maxProperties());

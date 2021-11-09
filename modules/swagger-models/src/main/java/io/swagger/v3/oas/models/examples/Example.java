@@ -16,6 +16,8 @@
 
 package io.swagger.v3.oas.models.examples;
 
+import io.swagger.v3.oas.annotations.OpenAPI31;
+
 /**
  * Example
  */
@@ -27,6 +29,8 @@ public class Example {
     private String externalValue = null;
     private String $ref = null;
     private java.util.Map<String, Object> extensions = null;
+
+    private boolean valueSetFlag;
 
     /**
      * returns the summary property from a Example instance.
@@ -78,10 +82,11 @@ public class Example {
 
     public void setValue(Object value) {
         this.value = value;
+        valueSetFlag = true;
     }
 
     public Example value(Object value) {
-        this.value = value;
+        setValue(value);
         return this;
     }
 
@@ -134,6 +139,14 @@ public class Example {
         this.extensions.put(name, value);
     }
 
+    @OpenAPI31
+    public void addExtension31(String name, Object value) {
+        if (name != null && (name.startsWith("x-oas-") || name.startsWith("x-oai-"))) {
+            return;
+        }
+        addExtension(name, value);
+    }
+
     public void setExtensions(java.util.Map<String, Object> extensions) {
         this.extensions = extensions;
     }
@@ -141,6 +154,14 @@ public class Example {
     public Example extensions(java.util.Map<String, Object> extensions) {
         this.extensions = extensions;
         return this;
+    }
+
+    public boolean getValueSetFlag() {
+        return valueSetFlag;
+    }
+
+    public void setValueSetFlag(boolean valueSetFlag) {
+        this.valueSetFlag = valueSetFlag;
     }
 
     @Override

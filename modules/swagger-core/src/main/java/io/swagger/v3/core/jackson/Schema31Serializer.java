@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ResolvableSerializer;
 import io.swagger.v3.oas.models.media.Schema;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 
@@ -30,9 +29,13 @@ public class Schema31Serializer extends JsonSerializer<Schema> implements Resolv
             Schema value, JsonGenerator jgen, SerializerProvider provider)
             throws IOException {
 
+        defaultSerializer.serialize(value, jgen, provider);
+
+/*
         // handle ref schema serialization skipping all other props
         if (value.getJsonSchema() != null) {
             jgen.writeObject(value.getJsonSchema());
         }
+*/
     }
 }
